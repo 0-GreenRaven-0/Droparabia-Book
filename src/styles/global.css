@@ -175,22 +175,47 @@
   }
 
   .cta-btn {
-    @apply flex items-center justify-center gap-4 w-full rounded-2xl px-8 py-5 no-underline;
+    @apply flex items-center justify-center gap-4 w-full px-8 py-5 no-underline cursor-pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
     background: linear-gradient(135deg, #2563EB 0%, #29B6F6 100%);
-    box-shadow: 0 4px 24px rgba(37,99,235,0.35);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 16px rgba(37,99,235,0.3);
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Shine sweep pseudo-element */
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    transition: left 0.45s ease-in-out;
+    pointer-events: none;
+  }
+
+  .cta-btn:hover::before {
+    left: 130%;
   }
 
   .cta-btn:hover {
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 8px 32px rgba(37,99,235,0.5);
-    filter: brightness(1.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 6px 32px rgba(37,99,235,0.45);
   }
 
   .cta-btn:active {
-    transform: translateY(0) scale(0.99);
-    box-shadow: 0 4px 24px rgba(37,99,235,0.35);
-    filter: brightness(1);
+    transform: translateY(2px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .cta-btn:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px rgba(37,99,235,0.5);
   }
 
   .cta-btn-inner {
