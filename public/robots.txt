@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://book.droparabia.com/sitemap.xml
