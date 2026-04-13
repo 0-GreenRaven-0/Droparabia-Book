@@ -27,10 +27,23 @@ import '../styles/global.css';
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Non-render-blocking font load -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=optional" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
-      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=optional"
+      rel="stylesheet" media="print" onload="this.media='all'"
     />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=optional" rel="stylesheet" />
+    </noscript>
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo.png?tr=w-700,q-85,f-webp" fetchpriority="high" />
+    <!-- Swiper CSS (modular) -->
+    <style>
+      @import 'swiper/css';
+      @import 'swiper/css/pagination';
+      @import 'swiper/css/navigation';
+    </style>
   </head>
 
   <body>
@@ -110,16 +123,16 @@ import '../styles/global.css';
         <div class="carousel-wrap reveal">
           <div class="swiper case-swiper">
             <div class="swiper-wrapper">
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo.png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(1).png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(2)%20(1)%20(1).png" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(3).png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(4)%20(1).png" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(5).png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(6).png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(7)%20(1)%20(1).png" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(8).png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
-              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(9)%20(2).png?updatedAt=1775387951020" alt="Community win" loading="lazy" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo.png?tr=w-700,q-85,f-webp" alt="Community win" loading="eager" fetchpriority="high" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(1).png?tr=w-700,q-85,f-webp" alt="Community win" loading="eager" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(2)%20(1)%20(1).png?tr=w-700,q-85,f-webp" alt="Community win" loading="eager" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(3).png?tr=w-700,q-85,f-webp" alt="Community win" loading="lazy" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(4)%20(1).png?tr=w-700,q-85,f-webp" alt="Community win" loading="lazy" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(5).png?tr=w-700,q-85,f-webp" alt="Community win" loading="lazy" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(6).png?tr=w-700,q-85,f-webp" alt="Community win" loading="lazy" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(7)%20(1)%20(1).png?tr=w-700,q-85,f-webp" alt="Community win" loading="lazy" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(8).png?tr=w-700,q-85,f-webp" alt="Community win" loading="lazy" /></div>
+              <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(9)%20(2).png?tr=w-700,q-85,f-webp" alt="Community win" loading="lazy" /></div>
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(10).png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(11).png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(12).png?tr=w-700,q-95,f-webp" alt="Community win" loading="lazy" /></div>
@@ -140,16 +153,18 @@ import '../styles/global.css';
           </div>
         </div>
 
+        <!-- CTA heading -->
+        <h2 class="cta-heading reveal">Get Access to Droparabia and start selling!</h2>
+
         <!-- CTA block -->
         <div class="cta-block reveal bg-white p-4 rounded-4xl border-2 border-blue-700">
 
           <a id="cta-book-call" href="https://calendly.com/d/cr37-8xm-k5s/45-min-lead-advisory-call" target="_blank" rel="noopener noreferrer" class="cta-btn">
-            <span class="cta-btn-main">Book Your Free Call</span>
+            <span class="cta-btn-main">Book Your Free Call to Secure Your Spot</span>
           </a>
 
-          <p class="cta-scarcity">Only a few spots left this week</p>
-          <p class="cta-explainer">Our team will walk you through Droparabia before you commit to anything</p>
-
+          <p class="cta-scarcity">Spots are limited each week to make sure we're guiding everyone effitiently</p>
+   
           <p class="cta-guarantee">100% Money Back Guarantee!</p>
           <div class="tp-row">
             <span class="tp-excellent">Rated Great</span>
@@ -163,12 +178,12 @@ import '../styles/global.css';
       </div>
     </section>
 
-    <style>@import 'swiper/css/bundle';</style>
-
     <script>
-      import Swiper from 'swiper/bundle';
+      import Swiper from 'swiper';
+      import { Navigation, Pagination } from 'swiper/modules';
 
       new Swiper('.case-swiper', {
+        modules: [Navigation, Pagination],
         slidesPerView: 1.15,
         spaceBetween: 14,
         centeredSlides: true,

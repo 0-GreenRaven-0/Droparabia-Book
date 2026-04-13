@@ -169,6 +169,14 @@
     @apply w-5 h-5;
   }
 
+  /* ─ CTA heading ─ */
+  .cta-heading {
+    @apply text-navy text-center font-semibold;
+    font-family: 'ibrand', var(--font-family-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    max-width: 640px;
+  }
+
   /* ─ CTA block ─ */
   .cta-block {
     @apply flex flex-col items-center gap-2 w-full max-w-[640px];
@@ -231,7 +239,7 @@
   }
 
   .cta-scarcity {
-    @apply text-sm font-semibold text-deep-brand;
+    @apply text-sm font-semibold text-red-700;
   }
 
   .cta-explainer {
