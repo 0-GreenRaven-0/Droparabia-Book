@@ -230,6 +230,15 @@
     @apply text-base font-medium text-white/80;
   }
 
+  .cta-scarcity {
+    @apply text-sm font-semibold text-deep-brand;
+  }
+
+  .cta-explainer {
+    @apply text-sm text-brand-muted text-center;
+    max-width: 420px;
+  }
+
   .cta-guarantee {
     @apply font-bold text-navy text-xl mt-2;
   }
