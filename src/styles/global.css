@@ -160,8 +160,12 @@
     @apply absolute z-10 flex items-center justify-center top-[40%]
            w-10 h-10 rounded-full cursor-pointer
            text-deep-brand border border-blue-200 bg-white
-           shadow-sm hover:bg-blue-50 hover:border-blue-300 hover:shadow-md;
+           shadow-sm hover:bg-blue-50 hover:border-blue-300 hover:shadow-md
+           opacity-40 hover:opacity-90 transition-opacity duration-200;
   }
+
+  .swiper-button-prev.swiper-nav-btn { left: 4px; }
+  .swiper-button-next.swiper-nav-btn { right: 4px; }
 
   .swiper-nav-btn::after { content: none; }
 
