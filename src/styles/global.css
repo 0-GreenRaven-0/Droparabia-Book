@@ -29,6 +29,20 @@
     font-family: var(--font-family-body);
     @apply bg-[#E0E0E0];
   }
+
+  html::before {
+    content: '';
+    @apply fixed -top-5 left-0 w-[380px] h-[380px] pointer-events-none z-0 opacity-60;
+    background: url('/dots3.png') center / contain no-repeat;
+  }
+
+  body::before {
+    content: '';
+    @apply fixed bottom-0 right-0 w-[380px] h-[380px] pointer-events-none z-0 opacity-60;
+    background: url('/dots3.png') center / contain no-repeat;
+    transform: rotate(180deg);
+  }
+
 }
 
 /* ── Components ───────────────────────────────────────── */
@@ -36,8 +50,9 @@
 
   /* ─ Hero section ─ */
   .hero-section {
-    @apply relative overflow-hidden px-5 pt-[72px] pb-24;
+    @apply relative overflow-hidden px-5 pt-6 pb-24;
   }
+
 
   .hero-inner {
     @apply relative mx-auto flex flex-col items-center text-center z-[1] gap-3;
@@ -52,27 +67,35 @@
   /* ─ Attention line ─ */
   .attention-line {
     @apply font-semibold text-white inline-block rounded-full px-5 py-1.5;
-    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
     background: linear-gradient(90deg, #1D4ED8 0%, #29B6F6 100%);
     letter-spacing: 0.01em;
   }
 
-  /* ─ Headline ─ */
-  .hero-headline {
-    @apply text-navy;
-    font-family: 'ibrand', var(--font-family-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    letter-spacing: 0.01em;
-    line-height: 1.2;
-    max-width: 930px;
+  /* ─ Hero content box ─ */
+  .hero-content-box {
+    @apply relative flex flex-col items-center text-center gap-3 px-10 pt-8 pb-3 w-full max-w-[880px];
   }
 
-  .hl-brand {
-    background: linear-gradient(90deg, #2563EB 0%, #29B6F6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+
+
+  /* ─ Headline ─ */
+  .hero-headline {
+    @apply text-navy tracking-[0.01em] leading-[1.2] max-w-[830px];
+    font-family: 'ibrand', var(--font-family-display);
+    font-size: clamp(2rem, 4vw, 3rem);
   }
+
+
+  .hl-brand {
+    color: #1D4ED8;
+  }
+
+  @keyframes gradient-shift {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
 
   .hl-accent {
     @apply text-deep-brand;
@@ -80,9 +103,8 @@
 
   /* ─ Subheadline ─ */
   .hero-sub {
-    @apply text-brand-muted leading-relaxed mt-1 mb-4;
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
-    white-space: nowrap;
+    @apply text-brand-muted leading-relaxed mt-2 mb-2 max-w-[830px] w-full;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
   }
 
   @media (max-width: 768px) {
@@ -130,6 +152,7 @@
     @apply w-full max-w-[1020px];
   }
 
+
   .case-swiper {
     @apply w-full;
     padding-bottom: 44px !important;
@@ -175,19 +198,31 @@
 
   /* ─ CTA heading ─ */
   .cta-heading {
-    @apply text-navy text-center font-semibold;
+    @apply text-navy text-center font-normal;
     font-family: 'ibrand', var(--font-family-display);
     font-size: clamp(1.6rem, 3vw, 2.2rem);
-    max-width: 640px;
+  }
+
+  /* ─ Heading arrows ─ */
+  .heading-arrow {
+    display: inline-block;
+    width: 32px;
+    height: 38px;
+    vertical-align: middle;
+    background: linear-gradient(90deg, #2563EB 0%, #29B6F6 50%, #2563EB 100%);
+    background-size: 200% auto;
+    animation: gradient-shift 3s linear infinite;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 48'%3E%3Cpath d='M14,0 L26,0 L26,26 L36,26 L20,48 L4,26 L14,26 Z'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 48'%3E%3Cpath d='M14,0 L26,0 L26,26 L36,26 L20,48 L4,26 L14,26 Z'/%3E%3C/svg%3E") center/contain no-repeat;
   }
 
   /* ─ CTA block ─ */
   .cta-block {
-    @apply flex flex-col items-center gap-2 w-full max-w-[640px];
+    @apply flex flex-col items-center gap-2 w-fit;
   }
 
   .cta-btn {
-    @apply flex items-center justify-center gap-4 w-full px-8 py-5 no-underline cursor-pointer;
+    @apply flex flex-col items-center justify-center gap-0.5 w-full px-6 py-3.5 no-underline cursor-pointer;
     position: relative;
     overflow: hidden;
     border-radius: 8px;
@@ -230,12 +265,21 @@
     box-shadow: 0 0 0 5px rgba(37,99,235,0.5);
   }
 
+
   .cta-btn-inner {
     @apply flex flex-col gap-0.5 items-center text-center;
   }
 
+  .cta-btn-top {
+    @apply flex items-center justify-between gap-6 w-full;
+  }
+
+  .cta-btn-arrow {
+    @apply text-white text-2xl font-bold shrink-0;
+  }
+
   .cta-btn-main {
-    @apply font-extrabold text-white text-2xl leading-tight;
+    @apply font-extrabold text-white text-xl leading-tight;
   }
 
   .cta-btn-sub {
@@ -252,7 +296,8 @@
   }
 
   .cta-guarantee {
-    @apply font-bold text-navy text-xl mt-2;
+    @apply font-extrabold text-white text-base mt-0.5;
+    text-shadow: 0 0 12px rgba(255,255,255,0.6);
   }
 
   /* ─ Trustpilot row ─ */
@@ -261,11 +306,23 @@
   }
 
   .tp-excellent {
-    @apply font-semibold text-navy text-sm;
+    @apply font-extrabold text-navy text-lg;
   }
 
   .tp-stars {
     @apply tracking-wide text-[#00B67A] text-base;
+  }
+
+  .tp-stars-row {
+    @apply flex items-center gap-0.5;
+  }
+
+  .tp-star {
+    @apply flex items-center justify-center text-white text-lg font-bold;
+    background-color: #00B67A;
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
   }
 
   .tp-review-count {
@@ -273,7 +330,7 @@
   }
 
   .tp-logo {
-    @apply h-5 w-auto;
+    @apply h-7 w-auto;
   }
 
   /* ─ Responsive ─ */
@@ -287,22 +344,28 @@
 
   /* Mobile */
   @media (max-width: 520px) {
+    html::before, body::before { @apply w-[210px] h-[210px] opacity-30; }
     .attention-line { font-size: 1rem; }
-    .hero-section  { @apply pt-12 pb-16 px-4; }
-    .hero-inner    { @apply gap-4; }
-    .hero-headline { font-size: clamp(1.75rem, 7vw, 2.2rem); }
+    .hero-section  { @apply pt-2 pb-16 px-4; }
+    .hero-inner    { @apply gap-2; }
+    .hero-content-box { @apply px-2 py-5; }
+    .hero-headline { font-size: clamp(2.2rem, 9vw, 2.8rem); }
+    .hero-content-box::before,
+    .hero-headline::after { @apply w-10 h-10; }
     .hero-sub      {
       font-size: 0.9rem;
-      @apply mt-0 mb-3;
+      @apply mt-3 mb-3;
     }
-    .stats-row     { @apply gap-3; }
-    .stat-badge    { @apply px-3 py-1.5; }
-    .stat-badge-label { @apply text-xs; }
+    .stats-row        { @apply gap-1 flex-row flex-nowrap items-center justify-center mb-3; }
+    .stat-badge       { @apply px-2 py-1 gap-1; }
+    .stat-badge svg   { @apply w-3 h-3 shrink-0; }
+    .stat-badge-label { @apply text-[9px]; }
     .cta-block     { @apply px-0; }
     .cta-btn       { @apply px-5 py-4 rounded-xl; }
     .cta-btn-main  { @apply text-base; }
     .cta-btn-sub   { @apply text-sm; }
     .cta-guarantee { @apply text-base; }
+    .cta-heading   { @apply flex items-center justify-center gap-3; }
   }
 
   /* Very small phones */
