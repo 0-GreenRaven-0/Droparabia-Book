@@ -345,6 +345,7 @@
   /* Mobile */
   @media (max-width: 520px) {
     html::before, body::before { @apply w-[210px] h-[210px] opacity-30; }
+    .hero-section  { @apply overflow-x-hidden; }
     .attention-line { font-size: 1rem; }
     .hero-section  { @apply pt-2 pb-16 px-4; }
     .hero-inner    { @apply gap-2; }
@@ -356,7 +357,7 @@
       font-size: 0.9rem;
       @apply mt-3 mb-3;
     }
-    .stats-row        { @apply gap-1 flex-row flex-nowrap items-center justify-center mb-3; }
+    .stats-row        { @apply gap-1 flex-row flex-wrap items-center justify-center mb-3; }
     .stat-badge       { @apply px-2 py-1 gap-1; }
     .stat-badge svg   { @apply w-3 h-3 shrink-0; }
     .stat-badge-label { @apply text-[9px]; }
