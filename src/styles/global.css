@@ -363,7 +363,7 @@
     .stat-badge-label { @apply text-[9px]; }
     .cta-block     { @apply px-0; }
     .cta-btn       { @apply px-5 py-4 rounded-xl; }
-    .cta-btn-main  { @apply text-base; }
+    .cta-btn-main  { @apply text-sm; }
     .cta-btn-sub   { @apply text-sm; }
     .cta-guarantee { @apply text-base; }
     .cta-heading   { @apply flex items-center justify-center gap-3; }
