@@ -346,11 +346,11 @@
   @media (max-width: 520px) {
     html::before, body::before { @apply w-[210px] h-[210px] opacity-30; }
     .hero-section  { @apply overflow-x-hidden; }
-    .attention-line { font-size: 1rem; }
+    .attention-line { font-size: 0.75rem; @apply px-3 py-1; }
     .hero-section  { @apply pt-2 pb-16 px-4; }
     .hero-inner    { @apply gap-2; }
     .hero-content-box { @apply px-2 py-5; }
-    .hero-headline { font-size: clamp(2.2rem, 9vw, 2.8rem); }
+    .hero-headline { font-size: clamp(2.4rem, 10vw, 3rem); }
     .hero-content-box::before,
     .hero-headline::after { @apply w-10 h-10; }
     .hero-sub      {
