@@ -102,7 +102,7 @@
   .hero-headline {
     @apply text-navy tracking-[0.01em] leading-[1.2] max-w-[830px];
     font-family: 'ibrand', var(--font-family-display);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
   }
 
 
