@@ -372,7 +372,7 @@
     .hero-section  { @apply pt-2 pb-16 px-4; }
     .hero-inner    { @apply gap-2; }
     .hero-content-box { @apply px-2 py-5; }
-    .hero-headline { font-size: clamp(1.8rem, 7.5vw, 2.4rem); }
+    .hero-headline { font-size: clamp(2.1rem, 8.5vw, 2.6rem); }
     .hero-content-box::before,
     .hero-headline::after { @apply w-10 h-10; }
     .hero-sub      {
@@ -383,7 +383,7 @@
     .stat-badge       { @apply px-2 py-1 gap-1; }
     .stat-badge svg   { @apply w-3 h-3 shrink-0; }
     .stat-badge-label { @apply text-[9px]; }
-    .cta-block     { @apply px-0; }
+    .cta-block     { @apply px-0 pb-10; }
     .cta-btn       { @apply px-5 py-4 rounded-xl; }
     .cta-btn-main  { @apply text-sm; }
     .cta-btn-sub   { @apply text-sm; }
@@ -393,7 +393,7 @@
 
   /* Very small phones */
   @media (max-width: 360px) {
-    .hero-headline { font-size: clamp(1.6rem, 7vw, 2rem); }
+    .hero-headline { font-size: clamp(1.9rem, 8vw, 2.3rem); }
     .attention-line { font-size: 0.6rem; }
     .stat-badge-label { font-size: 0.7rem; }
   }
