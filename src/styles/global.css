@@ -79,8 +79,17 @@
 
   /* ─ Hero eyebrow ─ */
   .hero-eyebrow {
-    @apply text-deep-brand font-semibold tracking-wide;
-    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+    @apply text-white font-semibold tracking-wide px-4 py-1.5 rounded-full;
+    font-size: 0.72rem;
+    background: linear-gradient(90deg, #1D4ED8 0%, #29B6F6 100%);
+  }
+
+  @media (min-width: 521px) {
+    .hero-eyebrow {
+      @apply text-deep-brand px-0 py-0 rounded-none bg-none;
+      font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+      background: none;
+    }
   }
 
   /* ─ Attention line ─ */
@@ -369,11 +378,6 @@
     html::before, body::before { @apply w-[210px] h-[210px] opacity-30; }
     .hero-section  { @apply overflow-x-hidden; }
     .attention-line { font-size: 0.75rem !important; @apply px-3 py-0.5; }
-    .hero-eyebrow {
-      font-size: 0.72rem !important;
-      @apply text-white px-4 py-1.5 rounded-full;
-      background: linear-gradient(90deg, #1D4ED8 0%, #29B6F6 100%);
-    }
     .hero-section  { @apply pt-14 pb-16 px-4; }
     .hero-inner    { @apply gap-2; }
     .hero-content-box { @apply px-2 py-5; }
