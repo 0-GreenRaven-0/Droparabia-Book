@@ -372,7 +372,7 @@
     .hero-section  { @apply pt-2 pb-16 px-4; }
     .hero-inner    { @apply gap-2; }
     .hero-content-box { @apply px-2 py-5; }
-    .hero-headline { font-size: clamp(2.4rem, 9.5vw, 2.9rem); }
+    .hero-headline { font-size: clamp(2.6rem, 10vw, 3.1rem); }
     .hero-content-box::before,
     .hero-headline::after { @apply w-10 h-10; }
     .hero-sub      {
