@@ -7,7 +7,7 @@
   src: url('/ibrand-font/ibrand.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 /* ── Theme tokens ─────────────────────────────────────── */
@@ -32,13 +32,13 @@
 
   html::before {
     content: '';
-    @apply fixed -top-5 left-0 w-[380px] h-[380px] pointer-events-none z-0 opacity-60;
+    @apply fixed -top-5 left-0 w-[260px] h-[260px] pointer-events-none z-0 opacity-45;
     background: url('/dots3.png') center / contain no-repeat;
   }
 
   body::before {
     content: '';
-    @apply fixed bottom-0 right-0 w-[380px] h-[380px] pointer-events-none z-0 opacity-60;
+    @apply fixed bottom-0 right-0 w-[260px] h-[260px] pointer-events-none z-0 opacity-45;
     background: url('/dots3.png') center / contain no-repeat;
     transform: rotate(180deg);
   }
@@ -50,18 +50,37 @@
 
   /* ─ Hero section ─ */
   .hero-section {
-    @apply relative overflow-hidden px-5 pt-6 pb-6;
+    @apply relative overflow-hidden px-5;
+  }
+
+  .hero-above-fold {
+    @apply flex flex-col items-center text-center gap-3 h-[88vh] justify-center;
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      @apply pt-6 pb-6;
+    }
+    .hero-above-fold {
+      @apply h-auto justify-start pt-8;
+    }
   }
 
 
   .hero-inner {
-    @apply relative mx-auto flex flex-col items-center text-center z-[1] gap-3;
+    @apply relative mx-auto flex flex-col items-center text-center z-[1] w-full;
     max-width: 1260px;
   }
 
   /* ─ Scroll reveal ─ */
   .reveal {
     @apply opacity-100;
+  }
+
+  /* ─ Hero eyebrow ─ */
+  .hero-eyebrow {
+    @apply text-deep-brand font-semibold tracking-wide;
+    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
   }
 
   /* ─ Attention line ─ */
@@ -103,8 +122,8 @@
 
   /* ─ Subheadline ─ */
   .hero-sub {
-    @apply text-brand-muted leading-relaxed mt-2 mb-2 max-w-[830px] w-full;
-    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    @apply text-navy leading-relaxed mt-2 mb-2 max-w-[830px] w-full;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
   }
 
   @media (max-width: 768px) {
@@ -226,8 +245,8 @@
     position: relative;
     overflow: hidden;
     border-radius: 8px;
-    background: linear-gradient(135deg, #2563EB 0%, #29B6F6 100%);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 16px rgba(37,99,235,0.3);
+    background: linear-gradient(135deg, #16A34A 0%, #22C55E 100%);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 16px rgba(22,163,74,0.35);
     transition: all 0.2s ease-in-out;
   }
 
@@ -251,7 +270,7 @@
 
   .cta-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 6px 32px rgba(37,99,235,0.45);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 6px 32px rgba(22,163,74,0.5);
   }
 
   .cta-btn:active {
@@ -295,9 +314,12 @@
     max-width: 420px;
   }
 
+  .cta-trust-group {
+    @apply flex flex-col items-center gap-1;
+  }
+
   .cta-guarantee {
-    @apply font-extrabold text-white text-base mt-0.5;
-    text-shadow: 0 0 12px rgba(255,255,255,0.6);
+    @apply font-extrabold text-navy text-base;
   }
 
   /* ─ Trustpilot row ─ */
@@ -306,11 +328,11 @@
   }
 
   .tp-excellent {
-    @apply font-extrabold text-navy text-lg;
+    @apply font-extrabold text-navy text-sm;
   }
 
   .tp-stars {
-    @apply tracking-wide text-[#00B67A] text-base;
+    @apply tracking-wide text-[#00B67A] text-sm;
   }
 
   .tp-stars-row {
@@ -318,19 +340,19 @@
   }
 
   .tp-star {
-    @apply flex items-center justify-center text-white text-lg font-bold;
+    @apply flex items-center justify-center text-white text-xs font-bold;
     background-color: #00B67A;
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     border-radius: 2px;
   }
 
   .tp-review-count {
-    @apply text-sm text-brand-muted;
+    @apply text-xs text-brand-muted;
   }
 
   .tp-logo {
-    @apply h-7 w-auto;
+    @apply h-5 w-auto;
   }
 
   /* ─ Responsive ─ */
