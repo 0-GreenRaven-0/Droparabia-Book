@@ -59,10 +59,10 @@
 
   @media (max-width: 768px) {
     .hero-section {
-      @apply pt-6 pb-6;
+      @apply pt-8 pb-6;
     }
     .hero-above-fold {
-      @apply h-auto justify-start pt-8;
+      @apply h-auto justify-start pt-6;
     }
   }
 
@@ -369,7 +369,8 @@
     html::before, body::before { @apply w-[210px] h-[210px] opacity-30; }
     .hero-section  { @apply overflow-x-hidden; }
     .attention-line { font-size: 0.75rem !important; @apply px-3 py-0.5; }
-    .hero-section  { @apply pt-2 pb-16 px-4; }
+    .hero-eyebrow { font-size: 0.72rem !important; }
+    .hero-section  { @apply pt-8 pb-16 px-4; }
     .hero-inner    { @apply gap-2; }
     .hero-content-box { @apply px-2 py-5; }
     .hero-headline { font-size: clamp(2.6rem, 10vw, 3.1rem); }
