@@ -343,7 +343,7 @@
 
   /* ─ Stat pill ─ */
   .stat-pill {
-    @apply mx-auto mt-3;
+    @apply mx-auto mt-3 w-full flex justify-center;
   }
 
   .stat-pill-icon {
@@ -506,9 +506,26 @@
   @media (min-width: 769px) {
     .hero-section { @apply pt-4; }
     .hero-above-fold { @apply pb-10 gap-1; }
-    .stat-pill-track { min-width: 340px; }
     .hero-sub { font-size: clamp(0.85rem, 1.1vw, 1rem); }
     .testimonials-section { @apply mt-10; }
+
+    .stat-pill-track {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 24px;
+      height: auto;
+      min-width: unset;
+      overflow: visible;
+      position: static;
+    }
+
+    .stat-pill-item {
+      position: static;
+      opacity: 1;
+      animation: none;
+      white-space: nowrap;
+    }
   }
 
   /* Tablet */
