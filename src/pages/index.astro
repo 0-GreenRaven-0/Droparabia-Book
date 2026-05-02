@@ -12,6 +12,9 @@ import '../styles/global.css';
     })(window,document,'script','dataLayer','GTM-PL74V6DG');</script>
     <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="icon" type="image/png" href="/Droparabia.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
@@ -26,9 +29,7 @@ import '../styles/global.css';
     />
     <!-- Preload brand font to prevent FOUC -->
     <link rel="preload" as="font" href="/ibrand-font/ibrand.otf" type="font/otf" crossorigin="anonymous" />
-    <!-- Preload decorative dots -->
-    <link rel="preload" as="image" href="/dots3.png" fetchpriority="low" />
-    <!-- Preload LCP image -->
+<!-- Preload LCP image -->
     <link rel="preload" as="image" href="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo.png?tr=w-700,h-1244,cm-pad_resize,bg-FFFFFF,q-85,f-webp" fetchpriority="high" type="image/webp" />
     <!-- Swiper CSS (modular) -->
     <style>
@@ -45,10 +46,67 @@ import '../styles/global.css';
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- ══════════════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════════════ -->
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="/" class="site-logo">
+          <img src="/Droparabia.png" alt="Droparabia" class="site-logo-img" />
+          <span class="site-logo-name">Droparabia</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="site-nav">
+          <a href="#access" class="site-nav-link">Get Access</a>
+          <a href="#testimonials" class="site-nav-link">Testimonials</a>
+          <a href="#faq" class="site-nav-link">FAQ</a>
+        </nav>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="mobile-overlay" id="mobile-overlay"></div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="#access" class="mobile-nav-link">Get Access to Droparabia</a>
+        <a href="#testimonials" class="mobile-nav-link">Testimonials</a>
+        <a href="#faq" class="mobile-nav-link">Frequently Asked Questions</a>
+      </div>
+    </header>
+
+    <script>
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const overlay = document.getElementById('mobile-overlay');
+
+      function closeMenu() {
+        mobileMenu.classList.remove('open');
+        overlay.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+
+      hamburger.addEventListener('click', () => {
+        const open = !mobileMenu.classList.contains('open');
+        mobileMenu.classList.toggle('open', open);
+        overlay.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+      });
+
+      overlay.addEventListener('click', closeMenu);
+      mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+    </script>
+
+    <!-- ══════════════════════════════════════════════
          HERO
     ══════════════════════════════════════════════ -->
     <section class="hero-section relative">
-   
+      <!-- Desktop dotted pattern top-left corner -->
+      <img src="/dots3.png" class="hidden md:block absolute top-0 left-0 pointer-events-none select-none" style="opacity:0.5; width:320px;" alt="" aria-hidden="true" />
 
 <div class="hero-inner">
 
@@ -62,26 +120,34 @@ import '../styles/global.css';
           <p class="hero-eyebrow">We're not here to sell you a "money making course"</p>
 
           <h1 class="hero-headline reveal">
-            Build a <span class="hl-brand">high-earning</span> online store in Lebanon in less than <span class="hl-brand">30 days</span> without owning an inventory
+            Build a <span class="hl-brand">high-earning</span> online store in less than <span class="hl-brand">30 days</span> without owning an inventory
           </h1>
 
-          <p class="hero-sub reveal">
-          Through a <strong>powerful, cost-saving</strong> system used by <strong>+500 Lebanese</strong> that does <strong>80% of the work</strong> for you!
-          </p>
+          <div class="headline-divider" aria-hidden="true"></div>
 
+          <p class="hero-sub reveal">
+           Get access to <strong>Lebanon's first Dropshipping</strong> platform and build your own  <strong>high-earning</strong> online store <strong>without risking</strong> your budget 
+          </p>
 
         </div>
 
             <!-- CTA block -->
-        <div class="cta-block reveal">
+        <div id="access" class="cta-block reveal">
+          <div class="stat-pill">
+            <div class="stat-pill-track">
+              <span class="stat-pill-item"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="stat-pill-icon"><path d="M5 13l4 4L19 7" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>No Experience or Technical Skills</span>
+              <span class="stat-pill-item"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="stat-pill-icon"><path d="M5 13l4 4L19 7" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>No Huge Upfront Costs</span>
+              <span class="stat-pill-item"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="stat-pill-icon"><path d="M5 13l4 4L19 7" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>+500 Lebanese Users</span>
+            </div>
+          </div>
           <a id="cta-book-call" href="https://calendly.com/d/cr37-8xm-k5s/45-min-lead-advisory-call" target="_blank" rel="noopener noreferrer" class="cta-btn">
-            <span class="cta-btn-main">Start your profitable online business!</span>
-            <span class="cta-btn-sub">Book a free call to learn how</span>
+            <span class="cta-btn-main">Let's build your online business today!</span>
+            <span class="cta-btn-sub">Book a <strong>FREE</strong> call to get instant access</span>
           </a>
           <div class="cta-trust-group">
             <span class="cta-guarantee">100% Money Back Guarantee!</span>
             <div class="tp-row">
-              <span class="tp-excellent">Great</span>
+              <span class="tp-excellent">Great!</span>
               <span class="tp-stars-row">
                 <span class="tp-star">★</span>
                 <span class="tp-star">★</span>
@@ -95,11 +161,14 @@ import '../styles/global.css';
 
         </div><!-- /hero-above-fold -->
 
-          <h2 class="cta-heading reveal"><span class="heading-arrow" aria-hidden="true"></span> See How much our users are earning!<span class="heading-arrow" aria-hidden="true"></span></h2>
-        <!-- Case-study carousel -->
-        <div class="carousel-wrap reveal">
-          <div class="swiper case-swiper">
-            <div class="swiper-wrapper">
+      </div><!-- /hero-inner -->
+    </section>
+
+    <div class="testimonials-section">
+      <h2 id="testimonials" class="cta-heading reveal"><span class="heading-arrow" aria-hidden="true"></span> See How much you can earn!<span class="heading-arrow" aria-hidden="true"></span></h2>
+      <div class="carousel-wrap reveal">
+        <div class="swiper case-swiper">
+          <div class="swiper-wrapper">
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo.png?tr=w-700,h-1244,cm-pad_resize,bg-FFFFFF,q-85,f-webp" alt="Community win" width="700" height="1244" loading="eager" fetchpriority="high" /></div>
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(1).png?tr=w-700,h-1244,cm-pad_resize,bg-FFFFFF,q-85,f-webp" alt="Community win" width="700" height="1244" loading="eager" /></div>
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/Testo%20(2)%20(1)%20(1).png?tr=w-700,h-1244,cm-pad_resize,bg-FFFFFF,q-85,f-webp" alt="Community win" width="700" height="1244" loading="eager" /></div>
@@ -124,21 +193,17 @@ import '../styles/global.css';
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/t11.png?tr=w-700,h-1244,cm-pad_resize,bg-FFFFFF,q-85,f-webp" alt="Community win" width="700" height="1244" loading="lazy" /></div>
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/t4.png?tr=w-700,h-1244,cm-pad_resize,bg-FFFFFF,q-85,f-webp" alt="Community win" width="700" height="1244" loading="lazy" /></div>
               <div class="swiper-slide"><img src="https://ik.imagekit.io/greenraven/MJ/Testimonials/12.png?tr=w-700,h-1244,cm-pad_resize,bg-FFFFFF,q-85,f-webp" alt="Community win" width="700" height="1244" loading="lazy" /></div>
-            </div>
-            <div class="swiper-pagination"></div>
-            <button class="swiper-button-prev swiper-nav-btn" aria-label="Previous">
-              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="15,4 7,12 15,20"/></svg>
-            </button>
-            <button class="swiper-button-next swiper-nav-btn" aria-label="Next">
-              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="9,4 17,12 9,20"/></svg>
-            </button>
           </div>
+          <div class="swiper-pagination"></div>
+          <button class="swiper-button-prev swiper-nav-btn" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="15,4 7,12 15,20"/></svg>
+          </button>
+          <button class="swiper-button-next swiper-nav-btn" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="9,4 17,12 9,20"/></svg>
+          </button>
         </div>
-
-
-
       </div>
-    </section>
+    </div><!-- /testimonials-section -->
 
     <script>
       import Swiper from 'swiper';
@@ -160,11 +225,44 @@ import '../styles/global.css';
         },
       });
 
+
     </script>
 
-    <section class="faq-section">
+    <script>
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const summary = item.querySelector('summary');
+
+        summary.addEventListener('click', e => {
+          e.preventDefault();
+
+          if (item.open) {
+            const anim = item.animate([
+              { height: item.offsetHeight + 'px' },
+              { height: summary.offsetHeight + 'px' }
+            ], { duration: 280, easing: 'ease' });
+            item.style.overflow = 'hidden';
+            anim.onfinish = () => {
+              item.open = false;
+              item.style.height = '';
+              item.style.overflow = '';
+            };
+          } else {
+            item.open = true;
+            const fullHeight = item.offsetHeight;
+            item.style.overflow = 'hidden';
+            item.animate([
+              { height: summary.offsetHeight + 'px' },
+              { height: fullHeight + 'px' }
+            ], { duration: 280, easing: 'ease' });
+            setTimeout(() => { item.style.overflow = ''; }, 280);
+          }
+        });
+      });
+    </script>
+
+    <section id="faq" class="faq-section">
       <div class="faq-wrap">
-        <h2 class="faq-headline">Frequently asked questions</h2>
+        <h2 class="faq-headline">What they always ask us</h2>
 
         <div class="faq-list">
 
@@ -216,6 +314,57 @@ import '../styles/global.css';
         </div>
       </div>
     </section>
+
+    <!-- Scroll progress ring (desktop only) -->
+    <div id="scroll-ring" class="scroll-ring hidden md:flex">
+      <span id="scroll-ring-label" class="scroll-ring-label">Scroll Down!</span>
+      <div class="scroll-ring-circle">
+        <svg class="scroll-ring-svg" viewBox="0 0 72 72" fill="none">
+          <circle cx="36" cy="36" r="30" stroke="#1a1a1a" stroke-width="3.5" />
+          <circle id="scroll-ring-progress" cx="36" cy="36" r="30"
+            stroke="#2563EB" stroke-width="3.5"
+            stroke-linecap="round"
+            stroke-dasharray="188.5"
+            stroke-dashoffset="188.5"
+            transform="rotate(-90 36 36)"
+          />
+        </svg>
+        <img src="/Droparabia.png" alt="" aria-hidden="true" class="scroll-ring-logo" />
+      </div>
+    </div>
+
+    <script>
+      const progress = document.getElementById('scroll-ring-progress');
+      const label = document.getElementById('scroll-ring-label');
+      const circumference = 188.5;
+      let hasScrolled = false;
+
+      function hideLabel() {
+        label.style.opacity = '0';
+        label.style.pointerEvents = 'none';
+      }
+
+      function updateRing() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? scrollTop / docHeight : 0;
+        progress.style.strokeDashoffset = String(circumference * (1 - pct));
+
+        if (!hasScrolled && scrollTop > 10) {
+          hasScrolled = true;
+          hideLabel();
+        }
+      }
+
+      setTimeout(() => {
+        if (!hasScrolled) {
+          label.style.opacity = '1';
+        }
+      }, 3000);
+
+      window.addEventListener('scroll', updateRing, { passive: true });
+      updateRing();
+    </script>
 
   </body>
 </html>
