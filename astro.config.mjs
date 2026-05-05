@@ -10,7 +10,14 @@ export default defineConfig({
   devToolbar: { enabled: false },
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    }
   },
 
   integrations: [react()]
