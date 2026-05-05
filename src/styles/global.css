@@ -669,9 +669,9 @@
 
   @media (max-width: 768px) {
     .page-container {
-      width: 97% !important;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
+      width: 100% !important;
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 
