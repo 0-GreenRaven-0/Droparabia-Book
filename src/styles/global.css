@@ -297,21 +297,36 @@
   }
 
   .swiper-nav-btn {
-    @apply hidden absolute z-10 flex items-center justify-center top-[40%]
-           w-10 h-10 rounded-full cursor-pointer
-           text-deep-brand border border-blue-200 bg-white
-           shadow-sm hover:bg-blue-50 hover:border-blue-300 hover:shadow-md
-           opacity-40 hover:opacity-90 transition-opacity duration-200;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 !important;
+    border-radius: 50% !important;
+    background: white !important;
+    border: 1.5px solid #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+    color: #2563EB !important;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: box-shadow 0.2s, border-color 0.2s;
   }
 
-  .swiper-button-prev.swiper-nav-btn { left: 4px; }
-  .swiper-button-next.swiper-nav-btn { right: 4px; }
-
-  .swiper-nav-btn::after { content: none; }
-
-  .swiper-nav-btn svg {
-    @apply w-5 h-5;
+  .swiper-nav-btn:hover {
+    border-color: #2563EB !important;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.15) !important;
   }
+
+  .swiper-button-prev.swiper-nav-btn { left: 4px !important; }
+  .swiper-button-next.swiper-nav-btn { right: 4px !important; }
+
+  .swiper-nav-btn::after { content: none !important; }
+
+  .swiper-nav-btn svg { width: 18px; height: 18px; }
 
   /* ─ CTA heading ─ */
   .cta-heading {
@@ -517,7 +532,10 @@
       opacity: 1;
       animation: none;
       white-space: nowrap;
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
     }
+
+    .stat-pill-icon { @apply w-6 h-6; }
   }
 
   /* Mobile */
@@ -883,7 +901,7 @@
 
   .section-bridge-text {
     @apply text-navy font-normal italic leading-relaxed text-center w-full;
-    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
   }
 
   /* ─ Solution / Bonus headline ─ */
