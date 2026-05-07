@@ -780,6 +780,12 @@
     @apply flex flex-col gap-7 flex-1;
   }
 
+  .split-content--centered {
+    @apply items-center text-center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
   .img-placeholder {
     @apply w-full bg-slate-100 flex items-center justify-center text-brand-muted font-semibold rounded-lg;
     min-height: 260px;
@@ -788,14 +794,16 @@
 
   /* ─ Problem section ─ */
   .split-lead {
-    @apply text-navy font-semibold leading-relaxed;
-    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    @apply text-navy font-bold leading-tight text-center;
+    font-family: 'ibrand', var(--font-family-display);
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
   }
 
   .pain-list {
     @apply flex flex-col gap-5;
     list-style: none;
     padding: 0;
+    align-items: center;
   }
 
   .pain-list li {
