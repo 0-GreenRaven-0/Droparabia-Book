@@ -1,0 +1,235 @@
+---
+import '../styles/global.css';
+import SurveyQuestions from '../components/Survey.jsx';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <title>Get Started — Droparabia</title>
+    <link rel="icon" type="image/png" href="/Droparabia.png" />
+
+    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css" />
+
+    <style>
+      /* ── Brevo overrides ─────────────────────────────────── */
+      .sib-form { background: transparent !important; padding: 0 !important; text-align: left !important; }
+      #sib-form-container { display: flex; flex-direction: column; align-items: stretch; }
+      #sib-container {
+        max-width: 100% !important; width: 100% !important;
+        border: none !important; border-radius: 0 !important;
+        background: transparent !important; padding: 0 !important;
+        box-shadow: none !important; direction: ltr;
+      }
+      #sib-container form { display: flex; flex-direction: column; gap: 0; }
+
+      .entry__label {
+        font-family: 'DM Sans', sans-serif !important;
+        font-size: 0.9rem !important; font-weight: 600 !important;
+        color: #374151 !important; margin-bottom: 0.3rem !important; display: block;
+      }
+      .entry__specification { display: none !important; }
+
+      input.input, select.input {
+        font-family: 'DM Sans', sans-serif !important;
+        font-size: 1rem !important; color: #111827 !important;
+        background: #fff !important; border: 2px solid #E2E8F0 !important;
+        border-radius: 12px !important; padding: 0.65rem 1rem !important;
+        width: 100% !important; outline: none !important;
+        transition: border-color 0.15s !important; box-shadow: none !important;
+        appearance: auto;
+      }
+      input.input:focus, select.input:focus { border-color: #2563EB !important; }
+      input.input::placeholder { color: #94A3B8 !important; font-family: 'DM Sans', sans-serif !important; }
+
+      .sib-sms-input { display: flex !important; gap: 0.5rem !important; align-items: stretch !important; }
+      .sib-sms-input .entry__field:first-child { flex: 0 0 110px; }
+      .sib-sms-input .entry__field:last-child { flex: 1; }
+      .sib-sms-tooltip { display: none !important; }
+
+      .sib-form-block__button {
+        font-family: 'DM Sans', sans-serif !important; font-size: 1rem !important;
+        font-weight: 700 !important; color: #fff !important;
+        background: linear-gradient(135deg, #2563EB, #3B82F6) !important;
+        border: none !important; border-radius: 10px !important;
+        padding: 0.8rem 1.75rem !important; width: 100% !important;
+        text-align: center !important; cursor: pointer !important;
+        box-shadow: 0 4px 14px rgba(37,99,235,0.28) !important;
+        transition: transform 0.15s, box-shadow 0.15s !important;
+        margin-top: 0.25rem;
+      }
+      .sib-form-block__button:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 6px 20px rgba(37,99,235,0.35) !important;
+      }
+
+      .entry__error {
+        font-family: 'DM Sans', sans-serif !important; font-size: 0.8rem !important;
+        color: #DC2626 !important; background: #FEF2F2 !important;
+        border: 1px solid #FCA5A5 !important; border-radius: 8px !important;
+        padding: 0.35rem 0.6rem !important; margin-top: 0.2rem !important;
+      }
+
+      #error-message, #success-message {
+        font-family: 'DM Sans', sans-serif !important; font-size: 0.9rem !important;
+        border-radius: 10px !important; max-width: 100% !important; margin-bottom: 0.75rem !important;
+      }
+      .progress-indicator__icon { display: none !important; }
+
+      .sib-form-block, .sib-input { padding: 0 0 0.75rem 0 !important; }
+      .input--hidden { display: none !important; }
+      .sib-hide-loader-icon { display: none; }
+
+      /* ── Section transitions ─────────────────────────────── */
+      #brevo-section { animation: fadeIn .3s ease; }
+      #survey-section { animation: fadeIn .3s ease; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+  </head>
+
+  <body class="survey-body">
+
+    <!-- ── Step 1: Subscribe ─────────────────────────────── -->
+    <div id="brevo-section" class="survey-wrap">
+      <div class="survey-card">
+
+        <div style="text-align:center; margin-bottom:1.25rem;">
+          <img src="/Droparabia.png" alt="Droparabia" style="height:38px; margin:0 auto 0.75rem;" />
+          <h1 class="survey-title" style="font-size:1.2rem; line-height:1.5;">Before we book you a call, we need to ask you a few questions to make sure we are the right fit for you</h1>
+        </div>
+
+        <div id="sib-form-container" class="sib-form-container">
+          <div id="error-message" class="sib-form-message-panel">
+            <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <span class="sib-form-message-panel__inner-text">Your subscription could not be saved. Please try again.</span>
+            </div>
+          </div>
+          <div id="success-message" class="sib-form-message-panel">
+            <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <span class="sib-form-message-panel__inner-text">Perfect! Just a moment...</span>
+            </div>
+          </div>
+
+          <div id="sib-container" class="sib-container--large sib-container--vertical">
+            <form id="sib-form" method="POST"
+              action="https://1c3c2cfb.sibforms.com/serve/MUIFAIHlMjNjDWtlytKDGJOZDS5zJZbxUveuJ_tdwyC_RacLMMnKkfVglbj6rSmtzG4ebGrhgh_a26kRC_8viD3A6rZcsx2PekzRsAzNc1Rlb7zJkATAEoXs6BaEGuEtUYX28rcSjuiZNa-Xy_hEL2qWEH_vhxxQDGMSG0-gkFvDFZFLJRYtcPgsA7IjylcLHiNgcMfv5e5cPnVCMA=="
+              data-type="subscription">
+
+              <div class="sib-input sib-form-block">
+                <div class="form__entry entry_block">
+                  <div class="form__label-row">
+                    <label class="entry__label" for="FIRSTNAME" data-required="*">First and Last Name</label>
+                    <div class="entry__field">
+                      <input class="input" maxlength="200" type="text" id="FIRSTNAME" name="FIRSTNAME"
+                        autocomplete="off" placeholder="Your full name" data-required="true" required />
+                    </div>
+                  </div>
+                  <label class="entry__error entry__error--primary"></label>
+                </div>
+              </div>
+
+              <div class="sib-input sib-form-block">
+                <div class="form__entry entry_block">
+                  <div class="form__label-row">
+                    <label class="entry__label" for="EMAIL" data-required="*">Email Address</label>
+                    <div class="entry__field">
+                      <input class="input" type="email" id="EMAIL" name="EMAIL"
+                        autocomplete="email" placeholder="your@email.com" data-required="true" required />
+                    </div>
+                  </div>
+                  <label class="entry__error entry__error--primary"></label>
+                </div>
+              </div>
+
+              <div class="sib-sms-field sib-form-block">
+                <div class="form__entry entry_block">
+                  <div class="form__label-row">
+                    <label class="entry__label" for="SMS" data-required="*">Phone Number</label>
+                    <div class="sib-sms-input-wrapper" style="direction:ltr">
+                      <div style="display:flex; gap:0.5rem; align-items:center;">
+                        <input type="hidden" name="SMS__COUNTRY_CODE" value="+961" />
+                        <span class="input" style="flex:0 0 auto; width:80px; display:flex; align-items:center; justify-content:center; cursor:default; color:#374151; font-weight:600;">🇱🇧 +961</span>
+                        <input type="tel" class="input" id="SMS" name="SMS"
+                          autocomplete="tel" placeholder="xx xxx xxx" data-required="true" required style="flex:1;" />
+                      </div>
+                    </div>
+                  </div>
+                  <label class="entry__error entry__error--primary"></label>
+                  <label class="entry__error entry__error--secondary"></label>
+                </div>
+              </div>
+
+              <div class="sib-form-block">
+                <button class="sib-form-block__button sib-form-block__button-with-loader"
+                  form="sib-form" type="submit">
+                  <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+                    <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+                  </svg>
+                  Get Started →
+                </button>
+              </div>
+
+              <input type="text" name="email_address_check" value="" class="input--hidden" />
+              <input type="hidden" name="locale" value="en" />
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Step 2: Survey questions (hidden until Brevo succeeds) ── -->
+    <div id="survey-section" style="display:none; width:100%;">
+      <SurveyQuestions client:load />
+    </div>
+
+    <!-- Brevo scripts -->
+    <script is:inline>
+      window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+      window.LOCALE = 'en';
+      window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+      window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank.";
+      window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+      window.INVALID_NUMBER = "The information provided is invalid. Please review the field format and try again.";
+      window.INVALID_DATE = "Please enter a valid date";
+      window.REQUIRED_MULTISELECT_MESSAGE = 'Please select at least 1 option';
+      window.translation = { common: { selectedList: '{quantity} list selected', selectedLists: '{quantity} lists selected', selectedOption: '{quantity} selected', selectedOptions: '{quantity} selected' } };
+      var AUTOHIDE = Boolean(0);
+    </script>
+    <script is:inline defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
+    <!-- Detect Brevo success → save data → unlock survey -->
+    <script is:inline>
+      const successPanel = document.getElementById('success-message');
+      if (successPanel) {
+        const observer = new MutationObserver(() => {
+          const s = window.getComputedStyle(successPanel);
+          if (s.display !== 'none' && s.visibility !== 'hidden' && successPanel.offsetParent !== null) {
+            observer.disconnect();
+
+            const name  = document.getElementById('FIRSTNAME')?.value?.trim() || '';
+            const email = document.getElementById('EMAIL')?.value?.trim() || '';
+            const phone = document.getElementById('SMS')?.value?.trim() || '';
+
+            sessionStorage.setItem('userData', JSON.stringify({ name, email, phone }));
+
+            const tokens = JSON.parse(sessionStorage.getItem('userTokens') || '{}');
+            tokens.takeSurvey = Math.random().toString(36).substring(2) + Date.now().toString(36);
+            sessionStorage.setItem('userTokens', JSON.stringify(tokens));
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'survey_started' });
+
+            document.getElementById('brevo-section').style.display = 'none';
+            document.getElementById('survey-section').style.display = 'block';
+            window.dispatchEvent(new CustomEvent('survey:unlock'));
+          }
+        });
+        observer.observe(successPanel, { attributes: true, attributeFilter: ['style', 'class'], subtree: true, childList: true });
+      }
+    </script>
+
+  </body>
+</html>

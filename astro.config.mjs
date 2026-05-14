@@ -13,9 +13,10 @@ export default defineConfig({
     plugins: [tailwindcss()],
     server: {
       headers: {
-        'Cache-Control': 'no-store, no-cache, must-revalidate',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0, s-maxage=0',
         'Pragma': 'no-cache',
-        'Expires': '0'
+        'Expires': '0',
+        'Surrogate-Control': 'no-store'
       }
     }
   },
