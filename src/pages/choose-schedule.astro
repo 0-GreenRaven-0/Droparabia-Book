@@ -9,158 +9,61 @@ import '../styles/global.css';
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <title>Book Your Call — Droparabia</title>
     <link rel="icon" type="image/png" href="/Droparabia.png" />
-    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css" />
-    <script is:inline src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+    <style>
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .cal-spinner {
+        width: 40px; height: 40px;
+        border: 3px solid #e2e8f0;
+        border-top-color: #2563eb;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        flex-shrink: 0;
+      }
+      @media (max-width: 768px) {
+        .cal-heading { font-size: 1.15rem !important; }
+      }
+    </style>
   </head>
 
-  <body style="background:#e0e0e0; min-height:100vh;">
+  <body style="background:#f8fafc; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:2rem 1rem 0;">
 
-    <!-- Shown if no valid token -->
-    <div id="no-access" style="display:none; min-height:100vh; display:none; flex-direction:column; align-items:center; justify-content:center; gap:1rem; padding:2rem; text-align:center;">
-      <h1 style="font-size:1.75rem; font-weight:700; color:#111827;">No cheating allowed! 😏</h1>
-      <p style="font-size:1.1rem; color:#374151;">Please go back and finish the survey first.</p>
-      <button onclick="window.location.href='/survey'" style="margin-top:1rem; padding:0.75rem 2rem; background:linear-gradient(135deg,#2563EB,#3B82F6); color:#fff; font-weight:700; border:none; border-radius:10px; font-size:1rem; cursor:pointer;">
-        Go Back
-      </button>
-    </div>
+    <h1 class="cal-heading" style="font-family:'DM Sans',sans-serif; font-size:clamp(1.4rem,3vw,2rem); font-weight:700; color:#1f2937; text-align:center; margin:0 0 1.5rem;">
+      Select the time that best suits you
+    </h1>
 
-    <div id="main-content" style="display:none;">
-    <div class="flex items-center justify-center p-4 min-h-screen">
-      <div class="w-full max-w-4xl" style="display:flex; flex-direction:column; gap:1.5rem;">
+    <!-- Wrapper so loader can overlay the widget -->
+    <div style="position:relative; width:100%; max-width:1100px; flex:1;">
 
-        <!-- Header -->
-        <div style="text-align:center; display:flex; flex-direction:column; gap:0.75rem;">
-          <h1 style="font-size:clamp(1.75rem,3vw,2.5rem); font-weight:700; color:#2563EB;">
-            We're a good fit for you! 
-          </h1>
-          <h3 style="font-size:1.1rem; font-weight:600; color:#1f2937;">
-            Our team is looking forward to get you started on building your business!
-          </h3>
-          <p style="color:#4B5563;">Select an available time that best suits you</p>
-
-        </div>
-
-        <!-- Calendly inline widget -->
-        <div id="calendly-widget" class="calendly-inline-widget" style="min-width:320px; height:700px;"></div>
-
+      <!-- Loading overlay -->
+      <div id="cal-loader" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; background:#f8fafc; z-index:10;">
+        <div class="cal-spinner"></div>
+        <p style="font-family:'DM Sans',sans-serif; font-size:0.9rem; color:#6b7280; margin:0;">Wait for the booking form to load</p>
       </div>
-    </div>
-    </div> <!-- /main-content -->
 
-    <!-- Hidden Brevo form (qualified list) — submits silently in background -->
-    <div style="display:none" aria-hidden="true">
-      <div id="sib-form-container">
-        <div id="error-message" class="sib-form-message-panel"></div>
-        <div id="success-message" class="sib-form-message-panel"></div>
-        <div id="sib-container">
-          <form id="sib-form" method="POST"
-            action="https://1c3c2cfb.sibforms.com/serve/MUIFAOB0Gnzm3UqcwzcElWJOcusggSFPS0akmKHzXEwwaLMG7yZfCKNAMw6w9h_7-_wtkoBo_P8H20EsfaYVisQc2kbEr-9LQ5wiLMs0ymmnRQU2D8DKfomHwgyh2gEdcO8QyJEjd4UCM0y2HHuddbir8MrftifKwSoHgfqqgINYZ4SPKPchSphfPD_6xkx3I9spg49Nje6qru4zzw=="
-            data-type="subscription">
-            <input type="text" id="FIRSTNAME" name="FIRSTNAME" maxlength="200" />
-            <input type="text" id="EMAIL" name="EMAIL" />
-            <select name="SMS__COUNTRY_CODE">
-              <option value="+961" selected>+961 LB</option>
-              <option value="+1">+1 US</option>
-              <option value="+44">+44 GB</option>
-              <option value="+971">+971 AE</option>
-              <option value="+966">+966 SA</option>
-            </select>
-            <input type="tel" id="SMS" name="SMS" />
-            <button type="submit" form="sib-form">Submit</button>
-            <input type="text" name="email_address_check" value="" class="input--hidden" />
-            <input type="hidden" name="locale" value="en" />
-          </form>
-        </div>
-      </div>
+      <!-- Calendly inline widget begin -->
+      <div class="calendly-inline-widget" data-url="https://calendly.com/d/cx6h-n22-cr7/45-min-droparabia-advisory-call" style="min-width:320px; height:900px;"></div>
+      <script is:inline type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <!-- Calendly inline widget end -->
+
     </div>
 
-    <!-- Token check + Calendly init -->
     <script is:inline>
-      (function() {
-        try {
-          const tokens = JSON.parse(sessionStorage.getItem('userTokens') || '{}');
-          if (tokens.qualified) {
-            document.getElementById('main-content').style.display = 'block';
-            Calendly.initInlineWidget({
-              url: 'https://calendly.com/d/cx6h-n22-cr7/45-min-droparabia-advisory-call',
-              parentElement: document.getElementById('calendly-widget'),
-            });
-          } else {
-            document.getElementById('no-access').style.display = 'flex';
-          }
-        } catch(_) {
-          document.getElementById('no-access').style.display = 'flex';
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.event === 'calendly.profile_page_viewed') {
+          document.getElementById('cal-loader').style.display = 'none';
         }
-      })();
-    </script>
-
-    <!-- canvas-confetti CDN -->
-    <script is:inline src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
-    <!-- Brevo globals -->
-    <script is:inline>
-      window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
-      window.LOCALE = 'en';
-      window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
-      window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank.";
-      window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
-      window.INVALID_NUMBER = "The information provided is invalid. Please review the field format and try again.";
-      window.INVALID_DATE = "Please enter a valid date";
-      window.REQUIRED_MULTISELECT_MESSAGE = 'Please select at least 1 option';
-      window.translation = { common: { selectedList: '{quantity} list selected', selectedLists: '{quantity} lists selected', selectedOption: '{quantity} selected', selectedOptions: '{quantity} selected' } };
-      var AUTOHIDE = Boolean(0);
-    </script>
-    <script is:inline defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-
-    <!-- Confetti + auto-subscribe -->
-    <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Confetti
-        setTimeout(() => {
-          confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-          setTimeout(() => confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } }), 250);
-          setTimeout(() => confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } }), 400);
-          setTimeout(() => confetti({ particleCount: 30, spread: 100, decay: 0.91, scalar: 1.2, shapes: ['star'] }), 600);
-
-          const end = Date.now() + 3000;
-          (function frame() {
-            confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: Math.random() }, colors: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444'] });
-            if (Date.now() < end) requestAnimationFrame(frame);
-          }());
-        }, 300);
-
-        // Silent Brevo subscription
-        setTimeout(() => {
-          try {
-            const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
-            const fn = document.getElementById('FIRSTNAME');
-            const em = document.getElementById('EMAIL');
-            const sm = document.getElementById('SMS');
-            if (fn && userData.name)  fn.value = userData.name;
-            if (em && userData.email) em.value = userData.email;
-            if (sm && userData.phone) sm.value = userData.phone;
-            const form = document.getElementById('sib-form');
-            if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-          } catch (_) {}
-        }, 200);
-      });
-
-      var callBooked = false;
-
-      window.addEventListener('message', (e) => {
         if (e.data && e.data.event === 'calendly.event_scheduled') {
-          callBooked = true;
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: 'call_booked' });
+          window.location.href = 'https://thank-you.droparabia.com';
         }
       });
 
-      window.addEventListener('beforeunload', () => {
-        if (!callBooked) {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: 'call_not_booked' });
-        }
-      });
+      // Fallback: reveal after 5s
+      setTimeout(function() {
+        var loader = document.getElementById('cal-loader');
+        if (loader) loader.style.display = 'none';
+      }, 5000);
     </script>
 
   </body>
