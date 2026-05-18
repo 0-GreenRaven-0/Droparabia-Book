@@ -307,7 +307,7 @@
 
   .header-cta-btn {
     @apply text-white font-semibold text-sm px-5 py-2 rounded-lg no-underline;
-    background: linear-gradient(135deg, #16A34A 0%, #22C55E 100%);
+    background: linear-gradient(135deg, #13813b 0%, #0f8038 100%);
     box-shadow: 0 2px 10px rgba(22,163,74,0.3);
     transition: all 0.2s ease-in-out;
   }
@@ -343,9 +343,9 @@
   /* ─ Headline ─ */
   .hero-headline {
     @apply text-navy leading-[1.15];
-    width: 93%;
+    width: 100%;
     font-family: 'ibrand', var(--font-family-display);
-    font-size: clamp(2.1rem, 4.5vw, 3.9rem);
+    font-size: clamp(2rem, 4.5vw, 3.7rem);
     letter-spacing: -0.01em;
     text-shadow: none;
   }
@@ -628,7 +628,7 @@
   }
 
   .cta-btn-main {
-    @apply font-extrabold text-white text-xl leading-tight;
+    @apply font-bold text-white text-xl leading-tight;
   }
 
   .cta-btn-sub {
@@ -759,8 +759,8 @@
     /* Hero */
     .hero-section { @apply pt-7 pb-8 px-1; }
     .hero-sub { white-space: normal; font-size: 0.78rem; font-weight: 400; }
-    .hero-headline { font-size: clamp(1.9rem, 9vw, 2.6rem) !important; }
-    .hero-eyebrow { font-size: 0.95rem; font-weight: 400; }
+    .hero-headline { font-size: clamp(2rem, 8.5vw, 2.6rem) !important; }
+    .hero-eyebrow { font-size: 0.85rem; font-weight: 400; }
 
     /* Survey pages — no card on mobile */
     .survey-body { background: #fff !important; }
@@ -869,7 +869,7 @@
     /* Bonuses */
     .bonuses-inner-headline { font-size: 1.1rem; }
     .bonuses-list li { font-size: 0.875rem; }
-    .bonuses-list { gap: 0.75rem; }
+    .bonuses-list { gap: 1rem; }
     .bonuses-list li::before { width: 20px; height: 20px; font-size: 0.7rem; line-height: 20px; }
 
     /* Guarantee */
@@ -1025,7 +1025,8 @@
 
   .pain-heading {
     @apply text-navy font-normal text-center w-full;
-    font-family: 'ibrand', var(--font-family-display);
+    font-weight: 700;
+    color: red;
     font-size: clamp(1.3rem, 2.2vw, 1.9rem);
     line-height: 1.2;
   }
@@ -1233,10 +1234,10 @@
   .solution-brand-tagline {
     @apply text-navy text-center;
     font-family: 'DM Sans', sans-serif;
-    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-    font-weight: 500;
+    font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+    font-weight: 600;
     margin-top: -1.75rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0.3rem;
     width: 100%;
   }
 
@@ -1809,8 +1810,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 .cta-pre-label {
   @apply text-center text-navy font-semibold;
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.4rem, 1.5vw, 1.2rem);
 }
 
 .footer-compliance {
