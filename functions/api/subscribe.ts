@@ -1,12 +1,11 @@
-export const prerender = false;
+interface Env {
+  GOOGLE_SERVICE_ACCOUNT_JSON: string;
+  GOOGLE_SHEET_BOOKED: string;
+}
 
-import type { APIRoute } from 'astro';
-
-// ── Google Sheets ─────────────────────────────────────────────────────────────
-
-function getSheetId(list: string): string | null {
+function getSheetId(env: Env, list: string): string | null {
   switch (list) {
-    case 'booked': return import.meta.env.GOOGLE_SHEET_BOOKED || null;
+    case 'booked': return env.GOOGLE_SHEET_BOOKED || null;
     default:       return null;
   }
 }
@@ -130,19 +129,25 @@ async function appendToSheet(sheetId: string, row: string[], token: string): Pro
   });
 }
 
-// ── Handler ───────────────────────────────────────────────────────────────────
+function jsonResponse(data: unknown, status: number): Response {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
 
-export const POST: APIRoute = async ({ request }) => {
+export async function onRequestPost(context: { request: Request; env: Env }): Promise<Response> {
   try {
-    const body = await request.json();
+    const { request, env } = context;
+    const body = await request.json() as { name?: string; email?: string; phone?: string; list?: string };
     const { name, email, phone, list } = body;
 
     if (!email || !list) {
-      return json({ success: false, error: 'Missing email or list' }, 400);
+      return jsonResponse({ success: false, error: 'Missing email or list' }, 400);
     }
 
-    const sheetId   = getSheetId(list);
-    const credsJson = import.meta.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+    const sheetId   = getSheetId(env, list);
+    const credsJson = env.GOOGLE_SERVICE_ACCOUNT_JSON;
 
     if (sheetId && credsJson) {
       const formattedPhone = phone ? formatPhone(phone) : '';
@@ -154,16 +159,9 @@ export const POST: APIRoute = async ({ request }) => {
       })().catch(() => {});
     }
 
-    return json({ success: true }, 200);
+    return jsonResponse({ success: true }, 200);
 
   } catch (err) {
-    return json({ success: false, error: String(err) }, 500);
+    return jsonResponse({ success: false, error: String(err) }, 500);
   }
-};
-
-function json(data: unknown, status: number) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: { 'Content-Type': 'application/json' },
-  });
 }
