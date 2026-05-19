@@ -1,11 +1,10 @@
-interface Env {
-  GOOGLE_SERVICE_ACCOUNT_JSON: string;
-  GOOGLE_SHEET_BOOKED: string;
-}
+export const prerender = false;
 
-function getSheetId(env: Env, list: string): string | null {
+import type { APIRoute } from 'astro';
+
+function getSheetId(list: string): string | null {
   switch (list) {
-    case 'booked': return env.GOOGLE_SHEET_BOOKED || null;
+    case 'booked': return import.meta.env.GOOGLE_SHEET_BOOKED || null;
     default:       return null;
   }
 }
@@ -37,11 +36,11 @@ async function getGoogleAccessToken(credsJson: string): Promise<string> {
   const now = Math.floor(Date.now() / 1000);
   const header  = base64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
   const payload = base64url(JSON.stringify({
-    iss: creds.client_email,
+    iss:   creds.client_email,
     scope: 'https://www.googleapis.com/auth/spreadsheets',
-    aud: 'https://oauth2.googleapis.com/token',
-    iat: now,
-    exp: now + 3600,
+    aud:   'https://oauth2.googleapis.com/token',
+    iat:   now,
+    exp:   now + 3600,
   }));
   const signingInput = `${header}.${payload}`;
   const privateKey = await crypto.subtle.importKey(
@@ -70,7 +69,7 @@ const SHEET_HEADERS = ['Name', 'Email', 'Phone Number', 'Date Booked'];
 
 async function removeEmailFromSheet(spreadsheetId: string, email: string, token: string): Promise<void> {
   const auth = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
-  const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/B:B`, { headers: auth });
+  const res  = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/B:B`, { headers: auth });
   const data = await res.json() as { values?: string[][] };
   if (!data.values) return;
   const rowsToDelete: number[] = [];
@@ -102,14 +101,13 @@ async function appendToSheet(sheetId: string, row: string[], token: string): Pro
   });
 }
 
-export async function onRequestPost(context: { request: Request; env: Env }): Promise<Response> {
+export const POST: APIRoute = async ({ request }) => {
   try {
-    const { request, env } = context;
-    const body = await request.json() as { name?: string; email?: string; phone?: string; list?: string };
+    const body = await request.json();
     const { name, email, phone, list } = body;
-    if (!email || !list) return resp({ success: false, error: 'Missing email or list' }, 400);
-    const sheetId = getSheetId(env, list);
-    const credsJson = env.GOOGLE_SERVICE_ACCOUNT_JSON;
+    if (!email || !list) return json({ success: false, error: 'Missing email or list' }, 400);
+    const sheetId   = getSheetId(list);
+    const credsJson = import.meta.env.GOOGLE_SERVICE_ACCOUNT_JSON;
     if (sheetId && credsJson) {
       const formattedPhone = phone ? formatPhone(phone) : '';
       const date = new Date().toLocaleDateString('en-GB');
@@ -119,12 +117,15 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
         await appendToSheet(sheetId, [name || '', email, formattedPhone, date], token);
       })().catch(() => {});
     }
-    return resp({ success: true }, 200);
+    return json({ success: true }, 200);
   } catch (err) {
-    return resp({ success: false, error: String(err) }, 500);
+    return json({ success: false, error: String(err) }, 500);
   }
-}
+};
 
-function resp(data: unknown, status: number): Response {
-  return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
+function json(data: unknown, status: number) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
