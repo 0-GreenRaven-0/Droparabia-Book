@@ -64,9 +64,25 @@ import '../styles/global.css';
           document.getElementById('cal-loader').style.display = 'none';
         }
         if (e.data && e.data.event === 'calendly.event_scheduled') {
+          var invitee = (e.data.payload && e.data.payload.invitee) || {};
+          var name    = invitee.name  || '';
+          var email   = invitee.email || '';
+          var phone   = invitee.text_reminder_number || '';
+
           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: 'call_booked' });
-          window.location.href = 'https://thank-you.droparabia.com';
+          window.dataLayer.push({ event: 'call_booked', name: name, email: email });
+
+          if (email) {
+            fetch('/api/subscribe', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: name, email: email, phone: phone, list: 'booked' })
+            }).catch(function() {});
+          }
+
+          setTimeout(function() {
+            window.location.href = 'https://thank-you.droparabia.com';
+          }, 500);
         }
       });
 
